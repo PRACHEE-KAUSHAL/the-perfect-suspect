@@ -1,18 +1,19 @@
+
 {
   "name": "the-perfect-suspect-render",
   "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "THE PERFECT SUSPECT — real-time multiplayer mystery game",
+  "description": "THE PERFECT SUSPECT - real-time multiplayer mystery game",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node build.mjs",
     "start": "node server.mjs",
-    "test:integration": "node tests/three-round.integration.mjs"
+    "test:integration": "node three-round.integration.mjs"
   },
   "engines": {
     "node": ">=22"
   },
   "devDependencies": {
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.3"
   }
 }
