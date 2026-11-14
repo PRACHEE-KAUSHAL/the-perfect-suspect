@@ -1,6 +1,149 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>THE PERFECT SUSPECT — Blackwood Manor</title><style>
-:root{color-scheme:dark;--bg:#0c0b17;--panel:#171529;--line:#39324e;--gold:#f4cc83;--teal:#70e3d0;--rose:#ff718b;--muted:#b5aecb}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0,#312444,transparent 42%),radial-gradient(ellipse at 90% 25%,#12343a,transparent 35%),var(--bg);color:#f7f2ff;font:15px system-ui,sans-serif;min-height:100vh}.wrap{max-width:1100px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}.brand{letter-spacing:.18em;font-weight:900}.brand small{display:block;font-size:10px;color:var(--muted);margin-top:5px}.muted{color:var(--muted)}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.2em;font-weight:800}.hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}.hero h1{font-size:clamp(48px,8vw,92px);line-height:.9;letter-spacing:-.06em;margin:18px 0}.hero h1 em{color:var(--gold);font-family:Georgia,serif}.hero p{color:#c8c0d8;line-height:1.8}.art{height:320px;border:1px solid #635071;border-radius:25px;position:relative;overflow:hidden;background:radial-gradient(circle at 70% 20%,#e6c8d4 0 8%,transparent 8.5%),linear-gradient(#27223e,#11111d)}.house{position:absolute;bottom:0;left:8%;width:84%;height:68%;background:linear-gradient(90deg,#191526,#3b2d49,#171425);clip-path:polygon(0 100%,0 36%,20% 36%,20% 15%,35% 15%,35% 0,65% 0,65% 15%,80% 15%,80% 36%,100% 36%,100% 100%)}.house:after{content:'▥ ▥ ▥';position:absolute;top:40%;left:20%;color:#ffc979;font-size:32px;letter-spacing:10px}.art label{position:absolute;bottom:20px;left:20px;font-size:12px;letter-spacing:.18em}.panel{background:linear-gradient(145deg,#1b1930,#11111f);border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:block;margin:13px 0;color:var(--muted);font-size:12px}.field input{display:block;width:100%;margin-top:7px;background:#0c0b18;border:1px solid var(--line);border-radius:10px;padding:13px;color:white;font:inherit}.btn{border:0;border-radius:10px;padding:13px 16px;font-weight:800;cursor:pointer;background:#2a2642;color:white}.primary{background:linear-gradient(110deg,#f4d48f,#efa8b1);color:#251729}.full{width:100%}.error{color:var(--rose);font-size:12px;min-height:18px;margin-top:7px}.hidden{display:none!important}.roomcode{font-size:28px;letter-spacing:.2em;color:var(--gold);font-family:monospace}.players{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}.player,.evidence,.chatmsg{background:#11111f;border:1px solid #312b47;border-radius:11px;padding:12px}.gamegrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.dossier{background:linear-gradient(135deg,#41263d,#201d39,#153236);border:1px solid #71506e;border-radius:14px;padding:18px;margin:18px 0}.dossier h3{font:26px Georgia,serif;margin:8px 0}.evidencegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.evidence h4{margin:7px 0}.evidence p,.chatmsg{font-size:12px;line-height:1.6;color:#c8c1d9}.chatlog{max-height:260px;overflow:auto;display:grid;gap:8px;margin-bottom:12px}.chatform{display:flex;gap:7px}.chatform input{min-width:0;flex:1;background:#0c0b18;border:1px solid var(--line);padding:10px;border-radius:9px;color:white}.option{display:block;padding:11px;background:#11111f;border:1px solid var(--line);border-radius:9px;margin:7px 0}.score{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0}@media(max-width:760px){.hero,.grid,.gamegrid{grid-template-columns:1fr}.art{height:220px}.wrap{padding:16px}.hero h1{font-size:56px}}
-</style></head><body><div class="wrap"><div class="top"><div class="brand">◈ THE PERFECT SUSPECT<small>BLACKWOOD MANOR · A FAMILY OF SECRETS</small></div><div class="muted" id="status">● READY TO CONNECT</div></div><section id="home"><div class="hero"><div><div class="eyebrow">A SOCIAL DEDUCTION MYSTERY · 2–8 PLAYERS</div><h1>Someone<br>in this<br>family is <em>lying.</em></h1><p>Lord Edmund Blackwood is dead. One of you knows why. Build a case from unreliable clues, expose contradictions, and decide who deserves your accusation.</p></div><div class="art"><div class="house"></div><label>BLACKWOOD MANOR · 11:40 PM</label></div></div><div class="grid"><div class="panel"><h2>Create a room</h2><p class="muted">Become the host and invite your suspects.</p><label class="field">YOUR NAME<input id="hostName" maxlength="22" placeholder="e.g. Morgan"></label><button class="btn primary full" id="create">Create private room →</button><div class="error" id="createError"></div></div><div class="panel"><h2>Join a room</h2><p class="muted">Enter the five-character code from your host.</p><label class="field">YOUR NAME<input id="joinName" maxlength="22" placeholder="e.g. Riley"></label><label class="field">ROOM CODE<input id="joinCode" maxlength="5" placeholder="A1B2C" style="text-transform:uppercase"></label><button class="btn full" id="join">Join the family ↗</button><div class="error" id="joinError"></div></div></div></section><section id="lobby" class="hidden"><div class="panel"><div class="eyebrow">THE FAMILY HAS GATHERED</div><h1>Room <span class="roomcode" id="code"></span></h1><p class="muted">Share the room code with 1–7 other players. Everyone opens this same address in their browser.</p><div class="players" id="lobbyPlayers"></div><div style="margin-top:20px" id="hostControls"><button class="btn primary" id="start">Begin the case →</button></div><div class="error" id="lobbyError"></div></div></section><section id="game" class="hidden"><div class="panel"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><div class="eyebrow" id="phaseLabel">CASE PHASE</div><h1 id="phaseTitle">The Family Gathering</h1></div><div class="roomcode" id="gameCode"></div></div><p class="muted" id="phaseDesc">Study the family. Everyone has something to hide.</p><div class="dossier" id="dossier"></div><div id="twist" class="dossier hidden"></div><div id="evidence" class="evidencegrid"></div><div id="vote" class="panel hidden"></div><div id="results" class="hidden"></div><button class="btn primary" id="advance" style="margin-top:18px">Next phase →</button><button class="btn primary hidden" id="nextRound" style="margin-top:18px">Begin next round →</button><div class="error" id="gameError"></div></div><div class="gamegrid"><div class="panel"><h3>Family members</h3><div class="players" id="gamePlayers"></div></div><div class="panel"><h3>Open discussion</h3><div class="chatlog" id="chatlog"></div><form class="chatform" id="chatform"><input id="chatinput" maxlength="300" placeholder="Make your case…"><button class="btn">Send</button></form></div></div></section></div><script>
-const $=id=>document.getElementById(id);let me=null,code=null,state=null,seenPhase='',selected=null,selectedEvidence=new Set(),poll=null;const descriptions={gathering:'Everyone has something to hide. Read your private dossier and start asking questions.',evidence:'The study has been searched. These clues are public, but not all of them mean what they seem to.',interrogation:'Compare stories. Who had access? Which account changes under pressure?',twist:'The evidence is less certain than it first appeared. Reconsider the timeline.',accusation:'Choose one suspect and up to three clues. Your accusation is final.',reveal:'The family secrets are exposed. The case is closed.'};async function api(action,data={}){let r=await fetch('/api/game',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,action,code:data.code??code,pid:me})});let j=await r.json();if(!r.ok)throw Error(j.error||'Something went wrong');return j}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;}[c]))}function show(id){['home','lobby','game'].forEach(x=>$(x).classList.toggle('hidden',x!==id))}function saveSession(){sessionStorage.setItem('tps',JSON.stringify({code,me}))}async function enter(result){code=result.code;me=result.pid;saveSession();state=result.state;showState();if(poll)clearInterval(poll);poll=setInterval(refresh,900)}async function refresh(){if(!code||!me)return;try{state=await(await fetch('/api/game?code='+encodeURIComponent(code)+'&pid='+encodeURIComponent(me))).json();if(state.error)throw Error(state.error);$('status').textContent='● LIVE ROOM · '+code;showState()}catch(e){$('status').textContent='● CONNECTION INTERRUPTED'}}$('create').onclick=async()=>{try{$('createError').textContent='';await enter(await api('create',{name:$('hostName').value.trim()}))}catch(e){$('createError').textContent=e.message}};$('join').onclick=async()=>{try{$('joinError').textContent='';await enter(await api('join',{name:$('joinName').value.trim(),code:$('joinCode').value.trim().toUpperCase()}))}catch(e){$('joinError').textContent=e.message}};$('joinCode').oninput=e=>e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,5);$('start').onclick=async()=>{try{await api('start');await refresh()}catch(e){$('lobbyError').textContent=e.message}};$('advance').onclick=async()=>{try{await api('advance');await refresh()}catch(e){$('gameError').textContent=e.message}};$('nextRound').onclick=async()=>{try{await api('nextRound');seenPhase='';await refresh()}catch(e){$('gameError').textContent=e.message}};$('chatform').onsubmit=async e=>{e.preventDefault();try{await api('chat',{text:$('chatinput').value});$('chatinput').value='';await refresh()}catch(e){$('gameError').textContent=e.message}};function showState(){if(!state)return;const live=state.phase!=='lobby';show(!live?'lobby':'game');if(!live){$('code').textContent=state.code;$('hostControls').classList.toggle('hidden',state.hostId!==me);$('start').disabled=!state.canStart;$('start').style.opacity=state.canStart?1:.45;$('lobbyPlayers').innerHTML=state.players.map(p=>`<div class="player">${esc(p.name)} ${p.id===me?'(you)':''}${p.host?' · HOST':''}</div>`).join('');return}$('gameCode').textContent=state.code;$('phaseLabel').textContent=`ROUND ${state.round} / 3 · PHASE ${state.phaseIndex+1} / ${state.phaseCount}${state.secondsLeft!=null?' · '+Math.floor(state.secondsLeft/60)+':'+String(state.secondsLeft%60).padStart(2,'0'):''}`;$('phaseTitle').textContent=state.phaseTitle;$('phaseDesc').textContent=descriptions[state.phase]||'';$('advance').classList.toggle('hidden',!state.canAdvance);$('nextRound').classList.toggle('hidden',!state.canNextRound);$('nextRound').textContent=`Begin round ${state.round+1} →`;$('advance').textContent=state.phase==='accusation'?'Close voting & reveal →':'Next phase →';$('dossier').classList.toggle('hidden',!state.role||state.phase==='reveal');if(state.role)$('dossier').innerHTML=`<div class="eyebrow">YOUR PRIVATE DOSSIER · KEEP IT SECRET</div><h3>${state.role.kind==='mastermind'?'The Mastermind':'Investigator'}</h3><p><b>${esc(state.role.character.name)} · ${esc(state.role.character.title)}</b></p><p>${esc(state.role.secret)}</p>${state.role.kind==='mastermind'?`<p style="color:var(--rose)"><b>Frame target:</b> ${esc(state.role.frameTarget)}</p>`:''}<p>${esc(state.role.objective)}</p>`;$('twist').classList.toggle('hidden',!state.twist||state.phase==='reveal');if(state.twist)$('twist').innerHTML=`<div class="eyebrow">NEW DISCOVERY</div><h3>${esc(state.twist.title)}</h3><p>${esc(state.twist.text)}</p>`;$('evidence').innerHTML=state.evidence.map(e=>`<div class="evidence"><div style="font-size:23px;color:var(--gold)">${e.icon}</div><div class="eyebrow">${esc(e.type)}</div><h4>${esc(e.title)}</h4><p>${esc(e.text)}</p></div>`).join('');$('gamePlayers').innerHTML=state.players.map(p=>`<div class="player">${esc(p.name)} ${p.id===me?'(you)':''}${p.host?' · HOST':''}</div>`).join('');$('chatlog').innerHTML=state.chat.slice(-50).map(m=>`<div class="chatmsg">${m.system?'✦ '+esc(m.text):'<b>'+esc(m.name)+':</b> '+esc(m.text)}</div>`).join('');$('chatlog').scrollTop=$('chatlog').scrollHeight;$('vote').classList.toggle('hidden',state.phase!=='accusation');if(state.phase==='accusation')renderVote();$('results').classList.toggle('hidden',state.phase!=='reveal');if(state.phase==='reveal')renderResults();if(seenPhase!==state.phase){seenPhase=state.phase;selected=null;selectedEvidence.clear()}}
-function renderVote(){if(state.role.kind==='mastermind'){$('vote').innerHTML='<h3>The room is watching.</h3><p>You cannot cast an investigator vote. Keep your story consistent and steer suspicion toward your target.</p>';return}if(!state.canVote){$('vote').innerHTML='<h3>Accusation locked</h3><p>Your vote is final. Wait for the others or the host to close voting.</p>';return}$('vote').innerHTML='<div class="eyebrow">FINAL ACCUSATION</div><h3>Who killed Edmund?</h3>'+state.players.filter(p=>p.id!==me).map(p=>`<label class="option"><input type="radio" name="suspect" value="${p.id}" ${selected===p.id?'checked':''}> ${esc(p.name)}</label>`).join('')+'<p class="eyebrow">SUPPORTING EVIDENCE · UP TO THREE</p>'+state.evidence.map(e=>`<label class="option"><input type="checkbox" value="${e.id}" ${selectedEvidence.has(e.id)?'checked':''}> ${esc(e.title)}</label>`).join('')+'<button class="btn primary full" id="lockvote">Lock my accusation →</button><div class="error" id="voteError"></div>';$('vote').querySelectorAll('[name=suspect]').forEach(el=>el.onchange=()=>selected=el.value);$('vote').querySelectorAll('[type=checkbox]').forEach(el=>el.onchange=()=>{if(el.checked){if(selectedEvidence.size>=3){el.checked=false;return}selectedEvidence.add(el.value)}else selectedEvidence.delete(el.value)});$('lockvote').onclick=async()=>{try{if(!selected)throw Error('Choose a suspect first.');await api('vote',{suspectId:selected,evidenceIds:[...selectedEvidence]});await refresh()}catch(e){$('voteError').textContent=e.message}}}function renderResults(){let r=state.results||{},killer=state.players.find(p=>p.id===r.mastermindId),target=state.players.find(p=>p.id===r.frameTargetId);$('results').innerHTML=`<div class="dossier"><div class="eyebrow">ROUND ${r.round||state.round} / 3 · THE CASE IS CLOSED</div><h2>${r.solved?'The truth prevailed.':'The Mastermind escapes.'}</h2><p>${r.solved?'The investigators identified the killer.':'The killer slips through the family’s cracks.'}</p><h3>The Mastermind was ${esc(killer?.name)}</h3><p>Framing target: ${esc(target?.name)} — innocent of the murder.</p></div><h3>What really happened</h3><p class="muted">${esc(state.truth?.solution)}</p><h3>Clue reveal</h3>${state.evidence.map(e=>`<p><b>${esc(e.title)}:</b> ${esc(state.truth?.explanations?.[e.id]||e.text)}</p>`).join('')}<h3>Round scores</h3>${state.players.map(p=>`<div class="score"><span>${esc(p.name)}</span><b>${r.scores?.[p.id]??0} pts</b></div>`).join('')}<h3>Match leaderboard</h3>${state.players.map(p=>`<div class="score"><span>${esc(p.name)}</span><b>${r.totalScores?.[p.id]??0} total pts</b></div>`).join('')}<div class="dossier"><h3>${state.round===3?'THE MATCH WINNER':'Round complete'}</h3><p>${state.round===3?esc(state.players.slice().sort((a,b)=>(r.totalScores?.[b.id]||0)-(r.totalScores?.[a.id]||0))[0]?.name||'No winner')+' wins the match.':'Scores carry forward. The host can begin the next round when everyone is ready.'}</p></div>`}try{const s=sessionStorage.getItem('tps');if(s){const x=JSON.parse(s);code=x.code;me=x.me;refresh()}}catch{}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mystery at Prachi Mansion</title>
+<style>
+:root{color-scheme:dark;--gold:#e8c875;--muted:#c0c1ce}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#39334d,#11121a 68%);color:#faf7f0;font-family:system-ui,sans-serif}
+main{width:min(760px,92%);margin:30px auto;padding:12px}.hero{text-align:center;margin:12px 0 26px}
+.eyebrow{letter-spacing:.2em;color:var(--gold);font-size:.75rem;font-weight:700}
+h1{font-family:Georgia,serif;font-size:clamp(2rem,7vw,3.5rem);line-height:1.05;color:#fff0c9;margin:12px 0}
+.hero p,.note{color:var(--muted)}.panel{background:rgba(32,34,53,.96);border:1px solid #4b4961;border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 12px 36px #0004}
+label{display:block;color:var(--muted);font-size:.92rem;margin:13px 0 6px}
+input{width:100%;padding:13px;border-radius:10px;border:1px solid #62617a;background:#131522;color:white;font:inherit}
+button{border:0;border-radius:10px;padding:12px 16px;margin:8px 7px 0 0;font:inherit;font-weight:750;cursor:pointer;background:var(--gold);color:#27202a}
+button.secondary{background:#484a63;color:white}button:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:7px}.hidden{display:none!important}
+.code{font-size:2.5rem;letter-spacing:.22em;text-align:center;font-weight:850;color:var(--gold);margin:8px}
+.players{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:14px 0}
+.player{background:#2b2e45;border-radius:10px;padding:12px}.player small{color:var(--gold)}
+.role{font-size:1.55rem;font-weight:850;color:var(--gold);margin-top:8px}
+.alert{color:#ffd2a7;min-height:1.4em;margin-top:12px}.footer{text-align:center;color:#9294a8;font-size:.8rem;margin:25px}
+.status{color:#f1dca8;font-size:.9rem;margin-top:8px}
+</style></head>
+<body><main>
+<header class="hero"><div class="eyebrow">A MULTIPLAYER MYSTERY PARTY GAME</div>
+<h1>THE MYSTERY AT<br>PRACHI MANSION</h1>
+<p>One missing heirloom. One hidden suspect. Can your friends solve the mystery?</p></header>
+<section class="panel" id="entry"><h2>Enter the mansion</h2>
+<label for="name">Your player name</label><input id="name" maxlength="24" placeholder="e.g. Pracho">
+<div class="actions"><button id="create">Create a room</button></div>
+<label for="code">Join with a 5-character room code</label><input id="code" maxlength="5" placeholder="ABCDE" autocomplete="off">
+<button id="join" class="secondary">Join room</button>
+<p class="note">At least 3 players are needed to start. Share the code with your friends.</p></section>
+<section class="panel hidden" id="lobby"><div class="eyebrow" style="text-align:center">YOUR ROOM CODE</div>
+<div class="code" id="roomCode">-----</div><div class="actions" style="justify-content:center"><button id="copy" class="secondary">Copy room code</button></div>
+<p class="note" id="roomStatus">Waiting for players…</p><div class="players" id="players"></div>
+<div class="actions"><button id="start">Start mystery</button><button id="leave" class="secondary">Leave room</button></div>
+<p class="note">The host can start when at least 3 players are connected.</p></section>
+<section class="panel hidden" id="game"><div class="eyebrow">THE MANSION CASE FILE</div>
+<h2>The missing heirloom</h2><p>A priceless heirloom has vanished from Prachi Mansion. Discuss who might be responsible.</p>
+<div class="panel"><div>Your secret role:</div><div class="role" id="role">Waiting for your role…</div><p id="secret"></p></div>
+<p class="note" id="voteStatus">Discuss the mystery. The host can open voting when everyone is ready.</p>
+<div id="voteChoices" class="players"></div><div class="actions"><button id="openVote">Open voting</button></div>
+<div id="result" class="alert" aria-live="polite"></div></section>
+<div class="alert" id="message" role="status" aria-live="polite"></div>
+<div class="footer">A little mansion mystery made with imagination.</div></main>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+(() => {
+const socket=io(), $=id=>document.getElementById(id);
+const STORAGE_KEY="prachiMansionSessionV2";
+let room=null, voting=false, voted=false, myPlayerId=null, resumeInProgress=false;
+const say=t=>$("message").textContent=t||"";
+const show=(id,on)=>$(id).classList.toggle("hidden",!on);
+const playerName=()=>$("name").value.trim();
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function savedSession(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");}catch{return null;}}
+function saveSession(r,name){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify({code:r.room.code,token:r.playerToken,playerId:r.playerId,name}));
+  myPlayerId=r.playerId;$("name").value=name;
+}
+function clearSession(){localStorage.removeItem(STORAGE_KEY);myPlayerId=null;}
+function enterRoom(r,name){
+  saveSession(r,name);room=r.room;voting=room.phase==="voting";voted=false;say("");render();
+}
+$("create").onclick=()=>{
+  const name=playerName();
+  socket.emit("room:create",{name},r=>{if(!r?.ok)return say(r?.error||"Could not create room.");enterRoom(r,name);});
+};
+$("join").onclick=()=>{
+  const name=playerName();
+  socket.emit("room:join",{code:$("code").value.trim().toUpperCase(),name},r=>{if(!r?.ok)return say(r?.error||"Could not join room.");enterRoom(r,name);});
+};
+$("code").addEventListener("input",e=>e.target.value=e.target.value.toUpperCase().replace(/[^A-F0-9]/g,"").slice(0,5));
+
+function fallbackCopy(text){
+  const field=document.createElement("textarea");field.value=text;field.setAttribute("readonly","");
+  field.style.position="fixed";field.style.opacity="0";field.style.left="-9999px";
+  document.body.appendChild(field);field.focus();field.select();field.setSelectionRange(0,field.value.length);
+  let copied=false;try{copied=document.execCommand("copy");}catch{}
+  field.remove();return copied;
+}
+$("copy").onclick=async()=>{
+  if(!room)return;
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(room.code);
+      say("Room code copied! You can paste it to your friends.");return;
+    }
+  }catch{}
+  if(fallbackCopy(room.code))say("Room code copied! You can paste it to your friends.");
+  else say("Automatic copy is unavailable here. Your room code is: "+room.code);
+};
+$("start").onclick=()=>socket.emit("game:start",r=>{if(!r?.ok)say(r?.error||"Could not start.");});
+$("openVote").onclick=()=>socket.emit("game:open-vote",r=>{if(!r?.ok)say(r?.error||"Could not open voting.");});
+$("leave").onclick=()=>socket.emit("room:leave",()=>{clearSession();location.reload();});
+
+function render(){
+  if(!room)return;
+  show("entry",false);show("lobby",room.phase==="lobby");show("game",room.phase!=="lobby");
+  $("roomCode").textContent=room.code;
+  const connected=room.connectedCount??room.players.filter(p=>p.connected!==false).length;
+  $("roomStatus").textContent=connected+" of "+room.players.length+" player(s) connected";
+  $("players").innerHTML=room.players.map(p=>`<div class="player">${safe(p.name)} ${p.isHost?"<small>· Host</small>":""}${p.connected===false?'<div class="status">Reconnecting…</div>':""}</div>`).join("");
+  const me=room.players.find(p=>p.id===myPlayerId);
+  $("start").disabled=connected<3||!room.players.every(p=>p.connected!==false)||!me||!me.isHost;
+  $("openVote").classList.toggle("hidden",!(me&&me.isHost&&room.phase==="playing"));
+  if(room.phase==="voting"){voting=true;renderVotes();$("voteStatus").textContent=`Votes received: ${room.voteCount} / ${room.players.length}`;}
+  if(room.phase==="ended"){$("voteChoices").innerHTML="";$("openVote").classList.add("hidden");}
+}
+function renderVotes(){
+  $("voteChoices").innerHTML="";
+  if(!room||!voting||room.phase!=="voting"||voted)return;
+  room.players.filter(p=>p.id!==myPlayerId&&p.connected!==false).forEach(p=>{
+    const b=document.createElement("button");b.className="secondary";b.textContent="Vote: "+p.name;
+    b.onclick=()=>socket.emit("game:vote",{targetId:p.id},r=>{
+      if(!r?.ok)return say(r?.error||"Vote failed.");voted=true;$("voteChoices").innerHTML="";say("Your vote has been counted.");
+    });
+    $("voteChoices").appendChild(b);
+  });
+}
+function tryResume(){
+  const session=savedSession();if(!session?.code||!session?.token||resumeInProgress)return;
+  resumeInProgress=true;say("Reconnecting to your previous room…");
+  socket.emit("room:resume",{code:session.code,token:session.token},r=>{
+    resumeInProgress=false;
+    if(!r?.ok){
+      clearSession();room=null;show("entry",true);show("lobby",false);show("game",false);
+      say(r?.error||"Your previous room could not be restored. Please join again.");return;
+    }
+    $("name").value=session.name||"";enterRoom(r,session.name||"");
+    say("Welcome back! You have rejoined your previous room.");
+  });
+}
+socket.on("connect",()=>{if(savedSession())tryResume();});
+socket.on("room:update",r=>{if(room&&r.code===room.code){room=r;render();}});
+socket.on("game:role",r=>{$("role").textContent=r.role;$("secret").textContent=r.secret;});
+socket.on("game:voting",()=>{voting=true;voted=false;$("voteStatus").textContent="Voting is open. Choose who you suspect.";renderVotes();});
+socket.on("game:votes",v=>$("voteStatus").textContent=`Votes received: ${v.count} / ${v.total}`);
+socket.on("game:vote-reset",m=>{voting=false;voted=false;$("voteChoices").innerHTML="";$("voteStatus").textContent=m;});
+socket.on("game:result",r=>{
+  $("voteChoices").innerHTML="";$("openVote").classList.add("hidden");$("voteStatus").textContent="Case closed.";
+  $("result").textContent=`${r.result} The suspect was ${r.culprit}. Most-voted: ${r.votedOut}${r.tie?" (tie)":""}.`;
+});
+socket.on("connect_error",()=>say("Connection problem. Trying to reconnect…"));
+socket.on("disconnect",()=>{resumeInProgress=false;say("Connection lost. Trying to reconnect automatically…");});
+})();
 </script></body></html>
